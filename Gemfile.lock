@@ -23,6 +23,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler (= 1.7.4)
   coderay (~> 1.1.1)
   grub
   pry
