@@ -1,0 +1,22 @@
+<% if @output %>
+  <%= @output_html %>
+  <hr>
+<% end %>
+<div class="gemfile-form">
+  <div class="gemfile-form__instructions">
+    <!-- Upload your Gemfile or paste its contents in the textarea below -->
+  </div>
+  <% if @error_message %>
+    <div class="alert alert-danger" role="alert"><%= @error_message %></div>
+  <% end %>
+  <form action="/" method="post" enctype="multipart/form-data">
+    <span class="btn btn-default btn-file gemfile-form__upload">
+        Browse <input id="gemfile-upload" type="file" name="gemfile-upload" />
+    </span>
+    <span class="gemfile-name"></span>
+    <textarea cols="110" rows="20" id="gemfile-textarea" name="gemfile-textarea" placeholder="Paste your Gemfile contents here"></textarea>
+    <div class="submit">
+      <input type="submit" class="btn btn-primary" />
+    </div>
+  </form>
+</div>
