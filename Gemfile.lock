@@ -2,8 +2,8 @@ GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.1)
-    grub (0.0.3)
-      bundler (~> 1.7.4)
+    grub (0.0.4)
+      bundler (~> 1.11.2)
     method_source (0.8.2)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -23,8 +23,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (= 1.7.4)
   coderay (~> 1.1.1)
   grub
   pry
   sinatra (~> 1.4.0)
+
+BUNDLED WITH
+   1.11.2

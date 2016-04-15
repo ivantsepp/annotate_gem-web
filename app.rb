@@ -2,7 +2,6 @@ require "sinatra/base"
 require "grub"
 require "tempfile"
 require "coderay"
-require "bundler"
 
 class GrubApp < Sinatra::Base
   get "/" do
