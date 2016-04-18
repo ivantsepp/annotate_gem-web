@@ -16,17 +16,14 @@ class GrubJob
     gemfile = Grub::Gemfile.new(file.path)
     gemfile.parse
     unless gemfile.gem_lines.empty?
-      Grub::SpecFinder.find_specs_for(gemfile.gem_lines)
+      Grub::SpecFinder.find_specs_for(gemfile.gem_lines) do |completed, total|
+        at(completed, total, "At #{completed} of #{total}")
+      end
       gemfile.write_comments
     end
 
     output = File.read(file.path)
     file.unlink
     completed('output' => output)
-    # total.times do |i|
-    #   num = i+1
-    #   at(num, total, "At #{num} of #{total}")
-    #   sleep(1)
-    # end
   end
 end

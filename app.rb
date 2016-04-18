@@ -8,7 +8,6 @@ require_relative "lib/grub_job"
 
 class GrubApp < Sinatra::Base
   get "/" do
-    @html = CodeRay.scan("puts 'Hello, world!'", :ruby)
     erb :index
   end
 
@@ -38,6 +37,7 @@ class GrubApp < Sinatra::Base
     content_type :json
     status = Resque::Plugins::Status::Hash.get(params[:id])
     status["output_html"] = CodeRay.scan(status['output'], :ruby).div if status.completed?
+    status["percentage"] = status.pct_complete
     status.to_json
   end
 end

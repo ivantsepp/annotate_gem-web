@@ -46,7 +46,13 @@
         var status = JSON.parse(request.responseText);
         if (status.status === "completed"){
           document.querySelectorAll(".grub-gemfile")[0].innerHTML = status.output_html;
+          var progressDiv = document.querySelectorAll(".progress")[0]
+          progressDiv.parentNode.removeChild(progressDiv);
         } else {
+          var percentage = status.percentage + "%";
+          var progressBar = document.querySelectorAll(".progress-bar")[0];
+          progressBar.style.width = percentage;
+          progressBar.innerHTML = percentage;
           setTimeout(getStatus.bind(null, jobID), 1000);
         }
 
