@@ -37,4 +37,33 @@
       el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
   }
 
+  function getStatus(jobID){
+    var request = new XMLHttpRequest();
+    request.open("GET", "/result/" + window.jobID, true);
+
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400) {
+        var status = JSON.parse(request.responseText);
+        if (status.status === "completed"){
+          document.querySelectorAll(".grub-gemfile")[0].innerHTML = status.output_html;
+        } else {
+          setTimeout(getStatus.bind(null, jobID), 1000);
+        }
+
+      } else {
+        alert("There was an error getting the job results");
+      }
+    };
+
+    request.onerror = function() {
+      alert("There was an error getting the job results");
+    };
+
+    request.send();
+  }
+
+  if (window.jobID){
+    getStatus(window.jobID);
+  }
+
 }());

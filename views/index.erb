@@ -1,5 +1,8 @@
-<% if @output %>
-  <%= @output_html %>
+<% if @job_id %>
+  <script type="text/javascript">
+    window.jobID = "<%= @job_id %>";
+  </script>
+  <div class="grub-gemfile"></div>
   <hr>
 <% end %>
 <div class="gemfile-form">

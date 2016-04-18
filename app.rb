@@ -3,6 +3,9 @@ require "grub"
 require "tempfile"
 require "coderay"
 
+require_relative "lib/grub_job"
+
+
 class GrubApp < Sinatra::Base
   get "/" do
     @html = CodeRay.scan("puts 'Hello, world!'", :ruby)
@@ -24,15 +27,17 @@ class GrubApp < Sinatra::Base
     end
     path = file.path
     file.close
-    gemfile = Grub::Gemfile.new(path)
-    gemfile.parse
-    unless gemfile.gem_lines.empty?
-      Grub::SpecFinder.find_specs_for(gemfile.gem_lines)
-      gemfile.write_comments
-    end
-    @output = File.read(path)
-    @output_html = CodeRay.scan(@output, :ruby).div
+    content = File.read(path)
+    @job_id = GrubJob.create(content: content)
+    puts @job_id
     file.unlink
     erb :index
+  end
+
+  get "/result/:id" do
+    content_type :json
+    status = Resque::Plugins::Status::Hash.get(params[:id])
+    status["output_html"] = CodeRay.scan(status['output'], :ruby).div if status.completed?
+    status.to_json
   end
 end
