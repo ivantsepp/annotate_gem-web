@@ -2,11 +2,17 @@ require "sinatra/base"
 require "grub"
 require "tempfile"
 require "coderay"
+require "sinatra/asset_pipeline"
 
 require_relative "lib/grub_job"
 
-
 class GrubApp < Sinatra::Base
+  set :assets_precompile,  %w(application.css application.js)
+  set :assets_prefix, %w(assets)
+  set :assets_css_compressor, :sass
+  set :assets_js_compressor, :uglifier
+  register Sinatra::AssetPipeline
+
   get "/" do
     erb :index
   end

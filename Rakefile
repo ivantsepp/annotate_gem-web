@@ -1,2 +1,5 @@
 require "resque/tasks"
-require_relative "lib/grub_job"
+require 'sinatra/asset_pipeline/task'
+require_relative "./app"
+
+Sinatra::AssetPipeline::Task.define! GrubApp

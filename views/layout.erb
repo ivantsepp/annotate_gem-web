@@ -7,10 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/syntax.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="<%= stylesheet_path 'application' %>">
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -30,6 +27,6 @@
         <div class="footer">
             Created and designed with ♥️ from <a href="http://tseivan.com">Ivan Tse</a><br />You can view the source code for this web app at <a href="https://github.com/ivantsepp/grub-web">grub-web</a> and the underlying library and CLI at <a href="https://github.com/ivantsepp/grub">grub</a>
         </div>
-        <script src="js/main.js"></script>
+        <script src="<%= javascript_path 'application' %>"></script>
     </body>
 </html>
