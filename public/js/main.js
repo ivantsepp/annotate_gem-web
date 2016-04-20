@@ -1,8 +1,13 @@
 (function(){
 
+  if (window.jobID){
+    getStatus(window.jobID);
+  }
+
   var gemfileUpload = document.getElementById("gemfile-upload");
   var gemfileTextarea = document.getElementById("gemfile-textarea");
   var gemfileName = document.querySelectorAll(".gemfile-name")[0];
+  var submitBtn = document.querySelectorAll(".submit-btn")[0];
 
   gemfileUpload.addEventListener("change", function(){
     var fullPath = gemfileUpload.value;
@@ -20,6 +25,11 @@
       removeClass(gemfileTextarea, "hidden")
       gemfileName.innerHTML = null;
     }
+    updateSubmitBtn();
+  });
+
+  gemfileTextarea.addEventListener("input", function(){
+    updateSubmitBtn();
   });
 
   // http://youmightnotneedjquery.com/
@@ -48,6 +58,10 @@
           document.querySelectorAll(".grub-gemfile")[0].innerHTML = status.output_html;
           var progressDiv = document.querySelectorAll(".progress")[0]
           progressDiv.parentNode.removeChild(progressDiv);
+          var code = document.querySelectorAll(".CodeRay")[0];
+          code.addEventListener("dblclick", function(){
+            SelectText(code);
+          });
         } else {
           var percentage = status.percentage + "%";
           var progressBar = document.querySelectorAll(".progress-bar")[0];
@@ -68,8 +82,31 @@
     request.send();
   }
 
-  if (window.jobID){
-    getStatus(window.jobID);
+  function updateSubmitBtn() {
+    if (gemfileUpload.value.length || gemfileTextarea.value.length) {
+      removeClass(submitBtn, "disabled");
+    } else {
+      addClass(submitBtn, "disabled");
+    }
   }
+
+  // http://stackoverflow.com/questions/985272/selecting-text-in-an-element-akin-to-highlighting-with-your-mouse/987376#987376
+  function SelectText(element) {
+      var doc = document
+          , range, selection;
+      if (doc.body.createTextRange) {
+          range = document.body.createTextRange();
+          range.moveToElementText(element);
+          range.select();
+      } else if (window.getSelection) {
+          selection = window.getSelection();
+          range = document.createRange();
+          range.selectNodeContents(element);
+          selection.removeAllRanges();
+          selection.addRange(range);
+      }
+  }
+
+
 
 }());

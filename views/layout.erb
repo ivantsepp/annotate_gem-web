@@ -6,7 +6,7 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/syntax.css">
@@ -16,11 +16,20 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div class="heading">
-          <h1 class="heading__title"><a href="/">Grub</a></h1>
-          <span class="heading__description">Add comments to your Gemfile with each dependency's description</span>
+        <div class="page">
+            <div class="heading">
+                <h1 class="heading__title">
+                    <i class="fa fa-file-text logo" aria-hidden="true"></i>
+                    <a href="/">Grub</a>
+                </h1>
+                <span class="heading__description">Add comments to your Gemfile with each dependency's description</span>
+            </div>
+            <%= yield %>
         </div>
-        <%= yield %>
-    <script src="js/main.js"></script>
+        <!-- https://css-tricks.com/snippets/css/sticky-footer/ -->
+        <div class="footer">
+            Created and designed with ♥️ from <a href="http://tseivan.com">Ivan Tse</a><br />You can view the source code for this web app at <a href="https://github.com/ivantsepp/grub-web">grub-web</a> and the underlying library and CLI at <a href="https://github.com/ivantsepp/grub">grub</a>
+        </div>
+        <script src="js/main.js"></script>
     </body>
 </html>
