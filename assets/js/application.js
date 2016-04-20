@@ -54,7 +54,7 @@
     request.onload = function() {
       if (request.status >= 200 && request.status < 400) {
         var status = JSON.parse(request.responseText);
-        if (status.status === "completed"){
+        if (status.status === "completed") {
           document.querySelectorAll(".grub-gemfile")[0].innerHTML = status.output_html;
           var progressDiv = document.querySelectorAll(".progress")[0]
           progressDiv.parentNode.removeChild(progressDiv);
@@ -62,6 +62,10 @@
           code.addEventListener("dblclick", function(){
             SelectText(code);
           });
+        } else if (status.status === "failed") {
+          var progressDiv = document.querySelectorAll(".progress")[0]
+          progressDiv.parentNode.removeChild(progressDiv);
+          document.querySelectorAll(".grub-gemfile")[0].innerHTML = "There was an error processing your Gemfile. Please file an issue at <a href='https://github.com/ivantsepp/grub-web/issues/new'>grub-web</a>. The error message is: " + status.message;
         } else {
           var percentage = status.percentage + "%";
           var progressBar = document.querySelectorAll(".progress-bar")[0];
