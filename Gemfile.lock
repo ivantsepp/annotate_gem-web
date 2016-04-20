@@ -7,7 +7,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     execjs (2.6.0)
-    grub (0.0.5)
+    grub (0.0.6)
       bundler (~> 1.11.2)
     hike (1.2.3)
     json (1.8.3)
