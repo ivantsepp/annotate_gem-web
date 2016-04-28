@@ -158,8 +158,10 @@ html, body {
 }
 
 .gemfile-form textarea {
+    font-size: 14px;
     margin-top: 20px;
-    width: 100%;
+    padding: 5px 5px;
+    width: calc(100% - 13px);
 }
 
 @media (max-width: 900px) {
@@ -175,7 +177,7 @@ html, body {
 }
 
 .gemfile-form__instructions {
-    margin-bottom: 10px;
+    margin-bottom: 40px;
 }
 
 .submit:after {
@@ -207,6 +209,7 @@ html, body {
 }
 
 .submit {
+    margin-top: 10px;
     width: 100%;
 }
 
@@ -225,6 +228,24 @@ html, body {
 
 pre {
     white-space: pre-wrap;
+}
+
+.or-divider {
+    border-bottom: 1px solid #777777;
+    height: 10px;
+    margin: 10px 0 20px;
+    text-align: center;
+}
+
+.or-divider__content {
+    background-color: #ffffff;
+    padding: 0 10px;
+}
+
+input[name=gemfile-text] {
+    font-size: 14px;
+    padding: 5px 5px;
+    width: calc(100% - 13px);
 }
 
 /* ==========================================================================

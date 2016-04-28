@@ -11,6 +11,9 @@
   <hr>
 <% end %>
 <div class="gemfile-form">
+  <% if @error_message %>
+    <div class="alert alert-danger" role="alert"><%= @error_message %></div>
+  <% end %>
   <div class="gemfile-form__instructions">
     Grub will iterate through the gems listed in your Gemfile and for each gem, it will add a comment containing the description and the website of the gem. An example output looks like:
     <!-- Copied from actual usage -->
@@ -19,16 +22,16 @@
 gem <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">spring</span><span style="color:#710">&quot;</span></span></pre></div>
     </div>
     <!-- End of paste -->
-    Upload your Gemfile or paste its contents in the textarea below and then hit Submit!
+    Choose one of three ways to run your Gemfile through grub. Either enter the GitHub owner/repo, upload your Gemfile, or paste its contents in the textarea below and then hit Submit!
   </div>
-  <% if @error_message %>
-    <div class="alert alert-danger" role="alert"><%= @error_message %></div>
-  <% end %>
   <form action="/" method="post" enctype="multipart/form-data">
+    <input id="gemfile-text" type="text" name="gemfile-text" placeholder="Enter Github username/repo (ex. rails/rails)" />
+    <div class="or-divider"><span class="or-divider__content">or</span></div>
     <span class="btn btn-default btn-file gemfile-form__upload">
         Browse <input id="gemfile-upload" type="file" name="gemfile-upload" />
     </span>
     <span class="gemfile-name"></span>
+    <div class="or-divider"><span class="or-divider__content">or</span></div>
     <textarea rows="20" id="gemfile-textarea" name="gemfile-textarea" placeholder="Paste your Gemfile contents here"></textarea>
     <div class="submit">
       <input type="submit" class="btn btn-primary disabled submit-btn" />

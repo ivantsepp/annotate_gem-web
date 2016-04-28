@@ -18,17 +18,33 @@ class GrubApp < Sinatra::Base
   end
 
   post "/" do
+    text = params[:"gemfile-text"]
     textarea = params[:"gemfile-textarea"]
     upload = params[:"gemfile-upload"]
-    if (textarea.nil? || textarea.empty?) && (upload.nil? || upload.empty?)
-      @error_message = "Need Gemfile either from a file or from contents pasted in textarea"
+    if (text.nil? || text.empty?) && (textarea.nil? || textarea.empty?) && (upload.nil? || upload.empty?)
+      @error_message = "Need Gemfile either from a Github link, from a file, or from contents pasted in textarea"
       return erb :index
     end
     if upload && upload[:tempfile]
       file = upload[:tempfile]
     else
       file = Tempfile.new("Gemfile")
-      file.write(textarea)
+      if text && !text.empty?
+        if text =~ /\A[\w.-]+\/[\w.-]+\z/
+          github_gemfile =  Net::HTTP.get(URI("https://raw.githubusercontent.com/#{text}/master/Gemfile"))
+          if github_gemfile == "Not Found"
+            @error_message = "Did not find a Gemfile for #{text}"
+            return erb :index
+          else
+            file.write(github_gemfile)
+          end
+        else
+          @error_message = "Invalid GitHub owner and repo. Please use the format `owner/repo`."
+          return erb :index
+        end
+      else
+        file.write(textarea)
+      end
     end
     path = file.path
     file.close

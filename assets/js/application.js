@@ -4,7 +4,9 @@
     getStatus(window.jobID);
   }
 
+  var gemfileText = document.getElementById("gemfile-text");
   var gemfileUpload = document.getElementById("gemfile-upload");
+  var gemfileUploadBtn = document.querySelectorAll(".gemfile-form__upload")[0];
   var gemfileTextarea = document.getElementById("gemfile-textarea");
   var gemfileName = document.querySelectorAll(".gemfile-name")[0];
   var submitBtn = document.querySelectorAll(".submit-btn")[0];
@@ -13,6 +15,8 @@
     var fullPath = gemfileUpload.value;
     if (fullPath.length) {
       addClass(gemfileTextarea, "hidden");
+      addClass(gemfileText, "hidden");
+      displayOrDividers(false);
       if (fullPath) {
         var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
         var filename = fullPath.substring(startIndex);
@@ -23,14 +27,51 @@
       }
     } else {
       removeClass(gemfileTextarea, "hidden")
+      removeClass(gemfileText, "hidden");
+      displayOrDividers(true);
       gemfileName.innerHTML = null;
     }
     updateSubmitBtn();
   });
 
   gemfileTextarea.addEventListener("input", function(){
+    if (gemfileTextarea.value.length) {
+      addClass(gemfileUploadBtn, "hidden");
+      addClass(gemfileText, "hidden");
+      displayOrDividers(false);
+    } else {
+      removeClass(gemfileUploadBtn, "hidden");
+      removeClass(gemfileText, "hidden");
+      displayOrDividers(true);
+    }
     updateSubmitBtn();
   });
+
+  gemfileText.addEventListener("input", function(){
+    if (gemfileText.value.length) {
+      addClass(gemfileUploadBtn, "hidden");
+      addClass(gemfileTextarea, "hidden");
+      displayOrDividers(false);
+    } else {
+      removeClass(gemfileUploadBtn, "hidden");
+      removeClass(gemfileTextarea, "hidden");
+      displayOrDividers(true);
+    }
+    updateSubmitBtn();
+  });
+
+  function displayOrDividers(bool){
+    if (bool) {
+      Array.prototype.forEach.call(document.querySelectorAll(".or-divider"), function(el){
+        removeClass(el, "hidden");
+      });
+    } else {
+      Array.prototype.forEach.call(document.querySelectorAll(".or-divider"), function(el){
+        addClass(el, "hidden");
+      });
+    }
+
+  }
 
   // http://youmightnotneedjquery.com/
   function addClass(el, className){
@@ -87,7 +128,7 @@
   }
 
   function updateSubmitBtn() {
-    if (gemfileUpload.value.length || gemfileTextarea.value.length) {
+    if (gemfileText.value.length || gemfileUpload.value.length || gemfileTextarea.value.length) {
       removeClass(submitBtn, "disabled");
     } else {
       addClass(submitBtn, "disabled");
@@ -110,7 +151,5 @@
           selection.addRange(range);
       }
   }
-
-
 
 }());
