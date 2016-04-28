@@ -130,8 +130,10 @@
   function updateSubmitBtn() {
     if (gemfileText.value.length || gemfileUpload.value.length || gemfileTextarea.value.length) {
       removeClass(submitBtn, "disabled");
+      submitBtn.disabled = false;
     } else {
       addClass(submitBtn, "disabled");
+      submitBtn.disabled = true;
     }
   }
 
