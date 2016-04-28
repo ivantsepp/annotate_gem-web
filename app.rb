@@ -58,6 +58,7 @@ class GrubApp < Sinatra::Base
   get "/result/:id" do
     content_type :json
     status = Resque::Plugins::Status::Hash.get(params[:id])
+    return status 404 if status.nil?
     status["output_html"] = CodeRay.scan(status['output'], :ruby).div if status.completed?
     status["percentage"] = status.pct_complete
     status.to_json
