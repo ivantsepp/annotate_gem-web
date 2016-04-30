@@ -7,7 +7,7 @@
       0%
     </div>
   </div>
-  <div class="grub-gemfile"></div>
+  <div class="annotate_gem-gemfile"></div>
   <hr>
 <% end %>
 <div class="gemfile-form">
@@ -15,14 +15,14 @@
     <div class="alert alert-danger" role="alert"><%= @error_message %></div>
   <% end %>
   <div class="gemfile-form__instructions">
-    Grub will iterate through the gems listed in your Gemfile and for each gem, it will add a comment containing the description and the website of the gem. An example output looks like:
+    AnnotateGem will iterate through the gems listed in your Gemfile and for each gem, it will add a comment containing the description and the website of the gem. An example output looks like:
     <!-- Copied from actual usage -->
     <div class="CodeRay">
       <div class="code"><pre><span style="color:#777"># Rails application preloader (https://github.com/rails/spring)</span>
 gem <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">spring</span><span style="color:#710">&quot;</span></span></pre></div>
     </div>
     <!-- End of paste -->
-    Choose one of three ways to run your Gemfile through grub. Either enter the GitHub owner/repo, upload your Gemfile, or paste its contents in the textarea below and then hit Submit!
+    Choose one of three ways to run your Gemfile through AnnotateGem. Either enter the GitHub owner/repo, upload your Gemfile, or paste its contents in the textarea below and then hit Submit!
   </div>
   <form action="/" method="post" enctype="multipart/form-data">
     <input id="gemfile-text" type="text" name="gemfile-text" placeholder="Enter Github username/repo (ex. rails/rails)" />

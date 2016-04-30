@@ -16,7 +16,7 @@ gem "rake", "~> 10.0"
 gem "sass", "~> 3.4.22"
 # Ruby wrapper for UglifyJS JavaScript compressor (http://github.com/lautis/uglifier)
 gem "uglifier", "~> 2.7.1"
-# Add comments to your Gemfile with each dependency's description. (https://github.com/ivantsepp/grub)
-gem "grub"
+# Add comments to your Gemfile with each dependency's description. (https://github.com/ivantsepp/annotate_gem)
+gem "annotate_gem"
 # An IRB alternative and runtime developer console (http://pryrepl.org)
 gem "pry"

@@ -1,11 +1,11 @@
 require "resque"
 require "resque/status"
-require "grub"
+require "annotate_gem"
 require "tempfile"
 
 Resque::Plugins::Status::Hash.expire_in = (24 * 60 * 60) # 24hrs in seconds
 
-class GrubJob
+class AnnotateGemJob
   include Resque::Plugins::Status
 
   def perform
@@ -13,10 +13,10 @@ class GrubJob
     file.write(options['content'])
     file.rewind
     file.close
-    gemfile = Grub::Gemfile.new(file.path)
+    gemfile = AnnotateGem::Gemfile.new(file.path)
     gemfile.parse
     unless gemfile.gem_lines.empty?
-      Grub::SpecFinder.find_specs_for(gemfile.gem_lines) do |completed, total|
+      AnnotateGem::SpecFinder.find_specs_for(gemfile.gem_lines) do |completed, total|
         at(completed, total, "At #{completed} of #{total}")
       end
       gemfile.write_comments

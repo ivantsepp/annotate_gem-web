@@ -1,12 +1,12 @@
 require "sinatra/base"
-require "grub"
+require "annotate_gem"
 require "tempfile"
 require "coderay"
 require "sinatra/asset_pipeline"
 
-require_relative "lib/grub_job"
+require_relative "lib/annotate_gem_job"
 
-class GrubApp < Sinatra::Base
+class AnnotateGemApp < Sinatra::Base
   set :assets_precompile,  %w(application.css application.js)
   set :assets_prefix, %w(assets)
   set :assets_css_compressor, :sass
@@ -49,7 +49,7 @@ class GrubApp < Sinatra::Base
     path = file.path
     file.close
     content = File.read(path)
-    @job_id = GrubJob.create(content: content)
+    @job_id = AnnotateGemJob.create(content: content)
     puts @job_id
     file.unlink
     erb :index

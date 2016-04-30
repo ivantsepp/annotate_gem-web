@@ -1,14 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    annotate_gem (0.0.8)
+      bundler (~> 1.11.2)
     coderay (1.1.1)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
     execjs (2.6.0)
-    grub (0.0.6)
-      bundler (~> 1.11.2)
     hike (1.2.3)
     json (1.8.3)
     method_source (0.8.2)
@@ -66,8 +66,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate_gem
   coderay (~> 1.1.1)
-  grub
   pry
   rake (~> 10.0)
   resque (~> 1.22.0)
